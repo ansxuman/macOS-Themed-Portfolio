@@ -1,6 +1,6 @@
 # macOS-Themed Portfolio
 
-A unique, interactive portfolio website inspired by the macOS interface : https://ansxuman.com
+A unique, interactive portfolio website inspired by the macOS interface : https://ssh-i.in
 
 Powered by [SvelteKit](https://kit.svelte.dev/), [TailwindCSS](https://tailwindcss.com/) and [TypeScript](https://www.typescriptlang.org/).
 
@@ -15,7 +15,12 @@ This project is a personal portfolio website that mimics the look and feel of ma
 
 ## Getting Started
 
-Clone the repo and install dependencies:
+Clone the repo:
+   ```bash
+   git clone https://github.com/ansxuman/macOS-Themed-Portfolio/
+   ```
+
+Install dependencies:
    ```bash
    npm install
    ```
@@ -27,4 +32,5 @@ Build for production:
    ```bash
    npm run build
    ```
+
 
