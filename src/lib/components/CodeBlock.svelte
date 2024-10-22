@@ -3,13 +3,13 @@
     import Prism from 'prismjs';
     import 'prismjs/themes/prism.css';
     import 'prismjs/components/prism-go';
-    // Import other language components as needed
 
     export let node: { lang?: string; text?: string } = {};
 
     let language = node.lang || '';
     let code = node.text || '';
     let highlighted: string;
+    let showToast = false;
 
     onMount(() => {
       if (language && Prism.languages[language]) {
@@ -21,42 +21,27 @@
 
     function copyCode() {
       navigator.clipboard.writeText(code).then(() => {
-        alert('Code copied to clipboard!');
+        showToast = true;
+        setTimeout(() => {
+          showToast = false;
+        }, 2000);
       });
     }
 </script>
 
-<div class="code-block relative">
+<div class="relative mb-4">
     <pre><code class={`language-${language}`}>{@html highlighted}</code></pre>
-    <button class="copy-button" on:click={copyCode}>
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-      </svg>
+    <button 
+      class="absolute top-2 right-2 bg-white bg-opacity-10 hover:bg-opacity-20 rounded p-1 transition-colors duration-300 flex items-center justify-center"
+      on:click={copyCode}
+    >
+      {#if showToast}
+        <span class="text-xs text-white bg-black bg-opacity-70 px-2 py-1 rounded">Copied!</span>
+      {:else}
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+        </svg>
+      {/if}
     </button>
 </div>
-
-<style>
-    .code-block {
-        margin-bottom: 1rem;
-        position: relative;
-    }
-    .copy-button {
-        position: absolute;
-        top: 0.5rem;
-        right: 0.5rem;
-        background: rgba(255, 255, 255, 0.1);
-        border: none;
-        border-radius: 4px;
-        padding: 0.25rem;
-        cursor: pointer;
-        transition: background 0.3s ease;
-    }
-    .copy-button:hover {
-        background: rgba(255, 255, 255, 0.2);
-    }
-    .copy-button svg {
-        width: 1rem;
-        height: 1rem;
-    }
-</style>

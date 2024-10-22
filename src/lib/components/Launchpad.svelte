@@ -5,7 +5,8 @@
   import terminal from './../assets/icons/terminal.avif';
   import safari from './../assets/icons/safari.png';
   import projects from './../assets/icons/projects.png';
-
+  import blog from './../assets/icons/blog.avif';
+  
   export let isOpen: boolean;
   const dispatch = createEventDispatcher();
 
@@ -17,6 +18,7 @@
     { id: 'terminal', name: 'Terminal', icon: terminal },
     { id: 'safari', name: 'Safari', icon: safari },
     { id: 'projects', name: 'Projects', icon: projects },
+    { id: 'blog', name: 'Blog', icon: blog },
   ];
 
   $: filteredApps = apps.filter(app => 

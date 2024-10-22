@@ -5,6 +5,7 @@
     import Safari from "./Safari.svelte";
     import Photos from "./Photos.svelte";
     import Projects from "./Projects.svelte";
+    import Blog from "./Blog.svelte";
   
     export let window: wType;
   
@@ -49,8 +50,10 @@
   <Safari {window} {startDrag} />
 {:else if window.type === "photos"}
 <Photos windowInstance={window} {startDrag} />
-{:else if window.type === "projects"}
+{:else if window.type === "projects"} 
   <Projects {window} {startDrag} />
+{:else if window.type === "blog"}
+  <Blog {window} {startDrag} />
 {/if}
     
     {#if !window.maximized}
