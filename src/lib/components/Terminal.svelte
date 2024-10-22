@@ -8,6 +8,7 @@
   } from "../stores/windowStore";
   import { onMount } from "svelte";
   import { fade } from "svelte/transition";
+  import { syncProjectsToFileSystem } from "../utils/syncProjects";
 
   $: currentDirectoryPath = `~/${currentDirectory.join("/")}`;
 
@@ -96,43 +97,43 @@
           addLine("Not a directory");
         }
         break;
-        case "cd":
-  if (args[0] === "..") {
-    if (currentDirectory.length > 1) {
-      currentDirectory = currentDirectory.slice(0, -1);
-    }
-  } else if (args[0]) {
-    const newDir = getCurrentDir();
-    if (
-      typeof newDir === "object" &&
-      args[0] in newDir &&
-      typeof newDir[args[0]] === "object"
-    ) {
-      currentDirectory = [...currentDirectory, args[0]];
-    } else {
-      addLine(`cd: ${args[0]}: Not a directory`);
-    }
-  } else {
-    currentDirectory = ["home"];
-  }
-  break;
-  case "cat":
-  if (args[0]) {
-    const currentDir = getCurrentDir();
-    if (typeof currentDir === "object" && args[0] in currentDir) {
-      const file = currentDir[args[0]];
-      if (typeof file === "string") {
-        file.split('\n').forEach(line => addLine(line));
-      } else {
-        addLine(`cat: ${args[0]}: Is a directory`);
-      }
-    } else {
-      addLine(`cat: ${args[0]}: No such file or directory`);
-    }
-  } else {
-    addLine("Usage: cat <filename>");
-  }
-  break;
+      case "cd":
+        if (args[0] === "..") {
+          if (currentDirectory.length > 1) {
+            currentDirectory = currentDirectory.slice(0, -1);
+          }
+        } else if (args[0]) {
+          const newDir = getCurrentDir();
+          if (
+            typeof newDir === "object" &&
+            args[0] in newDir &&
+            typeof newDir[args[0]] === "object"
+          ) {
+            currentDirectory = [...currentDirectory, args[0]];
+          } else {
+            addLine(`cd: ${args[0]}: Not a directory`);
+          }
+        } else {
+          currentDirectory = ["home"];
+        }
+        break;
+      case "cat":
+        if (args[0]) {
+          const currentDir = getCurrentDir();
+          if (typeof currentDir === "object" && args[0] in currentDir) {
+            const content = currentDir[args[0]];
+            if (typeof content === "string") {
+              addLine(makeUrlsClickable(content));
+            } else {
+              addLine(`cat: ${args[0]}: Is a directory`);
+            }
+          } else {
+            addLine(`cat: ${args[0]}: No such file or directory`);
+          }
+        } else {
+          addLine("Usage: cat <filename>");
+        }
+        break;
       case "pwd":
         addLine(`/${currentDirectory.join("/")}`);
         break;
@@ -162,6 +163,7 @@
   }
 
   onMount(() => {
+    syncProjectsToFileSystem(fileSystem);
     showPrompt = true;
     addLine("Welcome to ansxuman's Portfolio Terminal");
     addLine('Type "help" to see available commands');
@@ -187,6 +189,11 @@
         addLine(matches.join("  "));
       }
     }
+  }
+
+  function makeUrlsClickable(text: string): string {
+    const urlRegex = /(https?:\/\/[^\s]+)/g;
+    return text.replace(urlRegex, (url) => `<a href="${url}" target="_blank" class="text-blue-400 hover:underline">${url}</a>`);
   }
 </script>
 

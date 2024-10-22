@@ -1,7 +1,7 @@
 export interface Developer {
-  name: string;
-  role: string;
-  company: string;
+  // name: string;
+  // role: string;
+  // company: string;
   about: string;
   code: string[];
   interests: string[];
@@ -11,10 +11,10 @@ export interface Developer {
 }
 
 export const ansxuman: Developer = {
-  name: "Anshuman",
-  role: "Product Engineer",
-  company: "InstaSafe",
-  about: "Software Developer with a keen interest in building scalable and secure applications. \nAlways eager to learn and experiment with new technologies.",
+  // name: "Anshuman",
+  // role: "Product Engineer",
+  // company: "InstaSafe",
+  about: "Hey, I'm Anshuman, a Software Developer with a keen interest in building scalable \nand secure applications.Always eager to learn and experiment with new technologies.",
   code: ["Golang", "Svelte", "Angular", "TS", "JS", "Java", "Swift", "Rust", "Python"],
   interests: [
     "Full-Stack Development",

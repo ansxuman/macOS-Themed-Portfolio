@@ -1,34 +1,31 @@
-import { ansxuman } from './devInfo';
+import { ansxuman } from "./devInfo";
+import { syncProjectsToFileSystem } from "./syncProjects";
 
 export const fileSystem: FileSystem = {
   home: {
     about: `
-Name: ${ansxuman.name}
-Role: ${ansxuman.role}
-Company: ${ansxuman.company}
-
-About:
 ${ansxuman.about}
 
 Programming Languages:
-${ansxuman.code.join(', ')}
+${ansxuman.code.join(", ")}
 
 Operating Systems:
-${ansxuman.operatingSystems.join(', ')}
+${ansxuman.operatingSystems.join(", ")}
 
 Tools Used:
-${ansxuman.toolsUsed.join(', ')}
+${ansxuman.toolsUsed.join(", ")}
 
 IDEs:
-${ansxuman.ides.join(', ')}
+${ansxuman.ides.join(", ")}
     `,
-    projects: {
-    },
+    projects: {},
     interests: `
-${ansxuman.interests.join('\n')}
+${ansxuman.interests.join("\n")}
     `,
   },
 };
+
+syncProjectsToFileSystem(fileSystem);
 
 export interface FileSystem {
   [key: string]: string | FileSystem;
