@@ -15,7 +15,7 @@
   const apps = [
     { id: 'photos', name: 'Photos', icon: photos },
     { id: 'terminal', name: 'Terminal', icon: terminal },
-    // { id: 'safari', name: 'GUI Portfolio', icon: code },
+    { id: 'safari', name: 'Safari', icon: code },
     { id: 'projects', name: 'Projects', icon: projects },
   ];
 

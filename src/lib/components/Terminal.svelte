@@ -116,23 +116,23 @@
     currentDirectory = ["home"];
   }
   break;
-      case "cat":
-        if (args[0]) {
-          const currentDir = getCurrentDir();
-          if (typeof currentDir === "object" && args[0] in currentDir) {
-            const file = currentDir[args[0]];
-            if (typeof file === "string") {
-              addLine(file);
-            } else {
-              addLine(`cat: ${args[0]}: Is a directory`);
-            }
-          } else {
-            addLine(`cat: ${args[0]}: No such file or directory`);
-          }
-        } else {
-          addLine("Usage: cat <filename>");
-        }
-        break;
+  case "cat":
+  if (args[0]) {
+    const currentDir = getCurrentDir();
+    if (typeof currentDir === "object" && args[0] in currentDir) {
+      const file = currentDir[args[0]];
+      if (typeof file === "string") {
+        file.split('\n').forEach(line => addLine(line));
+      } else {
+        addLine(`cat: ${args[0]}: Is a directory`);
+      }
+    } else {
+      addLine(`cat: ${args[0]}: No such file or directory`);
+    }
+  } else {
+    addLine("Usage: cat <filename>");
+  }
+  break;
       case "pwd":
         addLine(`/${currentDirectory.join("/")}`);
         break;

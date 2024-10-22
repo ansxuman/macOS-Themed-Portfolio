@@ -12,6 +12,8 @@ This project is a personal portfolio website that mimics the look and feel of ma
 - Launchpad for an app-like experience
 - Draggable and resizable windows
 - Minimizable and maximizable windows
+- Interactive Terminal
+- Applications designed to present to showcase your stuff in a distinctive manner
 
 ## Getting Started
 
