@@ -6,24 +6,39 @@
   export let startDrag: (e: MouseEvent, id: string, action: 'move' | 'resize') => void;
   export let windowInstance: wType;
 
-  let photos: { path: string; name: string; album: string }[] = [];
-  let selectedPhoto: { path: string; name: string; album: string } | null = null;
+  interface Photo {
+    path: string;
+    name: string;
+    album: string;
+    isFavorite: boolean;
+  }
+
+  let photos: Photo[] = [];
+  let selectedPhoto: Photo | null = null;
   let isGridView = true;
   let sidebarOpen = true;
   let currentView = 'Library';
   let currentAlbum = 'All Photos';
 
+  function toggleFavorite(photo: Photo) {
+  photo.isFavorite = !photo.isFavorite;
+  photos = [...photos]; // Trigger reactivity
+  localStorage.setItem('favoritePhotos', JSON.stringify(photos.filter(p => p.isFavorite).map(p => p.name)));
+}
+
   onMount(async () => {
     const photoModules = import.meta.glob('../assets/photos/*.{jpeg,jpg,png,gif}', { eager: true });
+    const favoritePhotos = JSON.parse(localStorage.getItem('favoritePhotos') || '[]');
     for (const path in photoModules) {
       const photo = photoModules[path] as { default: string };
       const name = path.split('/').pop() || '';
       const album = Math.random() > 0.5 ? 'Favorites' : 'Recents';
-      photos = [...photos, { path: photo.default, name, album }];
+      const isFavorite = favoritePhotos.includes(name);
+      photos = [...photos, { path: photo.default, name, album, isFavorite }];
     }
   });
 
-  function selectPhoto(photo) {
+  function selectPhoto(photo: Photo) {
     selectedPhoto = photo;
   }
 
@@ -49,14 +64,16 @@
 
   $: filteredPhotos = currentAlbum === 'All Photos' 
     ? photos 
-    : photos.filter(photo => photo.album === currentAlbum);
+    : currentAlbum === 'Favorites'
+      ? photos.filter(photo => photo.isFavorite)
+      : photos.filter(photo => photo.album === currentAlbum);
 
-    function openCloud() {
-  const url = 'https://www.pexels.com/@ansxuman/';
-  if (typeof window !== 'undefined') {
-    window.open(url, '_blank');
+  function openCloud() {
+    const url = 'https://www.pexels.com/@ansxuman/';
+    if (typeof window !== 'undefined') {
+      window.open(url, '_blank');
+    }
   }
-}
 </script>
 
 <div class="bg-white h-full rounded-lg flex flex-col shadow-lg overflow-hidden font-sans">
@@ -91,8 +108,8 @@
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
       {/if}
     </button>
-    <button on:click={openCloud} class="text-gray-600 hover:text-gray-800 transition-colors ml-2">
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path></svg>
+    <button on:click={openCloud} class="text-gray-600 hover:text-gray-800 transition-colors ml-2 flex items-center">
+      Pexels <svg class="w-5 h-5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path></svg>
     </button>
   </div>
 
@@ -122,9 +139,17 @@
         {/if}
         <div class={isGridView ? "grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4" : "space-y-4"}>
           {#each filteredPhotos as photo}
-            <div class="group relative overflow-hidden rounded-lg shadow-md cursor-pointer" on:click={() => selectPhoto(photo)}>
-              <img src={photo.path} alt={photo.name} class={isGridView ? "w-full h-40 object-cover" : "w-full h-20 object-cover"} />
-              <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-opacity duration-300"></div>
+          <div class="group relative overflow-hidden rounded-lg shadow-md cursor-pointer" on:click={() => selectPhoto(photo)}>
+            <img src={photo.path} alt={photo.name} class={isGridView ? "w-full h-40 object-cover" : "w-full h-20 object-cover"} />
+            <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-opacity duration-300"></div>
+            <button 
+            class="absolute bottom-2 right-2 text-white hover:text-red-500 transition-colors duration-200"
+            on:click|stopPropagation={() => toggleFavorite(photo)}
+          >
+            <svg class="w-6 h-6" fill={photo.isFavorite ? "red" : "none"} stroke={photo.isFavorite ? "red" : "white"} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+            </svg>
+          </button>
               {#if !isGridView}
                 <div class="absolute inset-0 flex items-center p-2 bg-black bg-opacity-50 text-white">
                   <span class="text-sm">{photo.name}</span>
@@ -137,6 +162,7 @@
         <div class="text-center text-gray-600">
           <h2 class="text-2xl font-semibold mb-4">For You</h2>
           <p>Personalized photo suggestions will appear here.</p>
+          
         </div>
       {:else if currentView === 'Memories'}
         <div class="text-center text-gray-600">
