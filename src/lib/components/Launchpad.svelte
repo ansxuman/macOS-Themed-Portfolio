@@ -1,10 +1,10 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
   import { fade, scale } from 'svelte/transition';
-  import photos from './../assets/img/photos.avif';
-  import terminal from './../assets/img/terminal.avif';
-  import code from './../assets/img/code.png';
-  import projects from './../assets/img/projects.png';
+  import photos from './../assets/icons/photos.avif';
+  import terminal from './../assets/icons/terminal.avif';
+  import safari from './../assets/icons/safari.png';
+  import projects from './../assets/icons/projects.png';
 
   export let isOpen: boolean;
   const dispatch = createEventDispatcher();
@@ -15,7 +15,7 @@
   const apps = [
     { id: 'photos', name: 'Photos', icon: photos },
     { id: 'terminal', name: 'Terminal', icon: terminal },
-    { id: 'safari', name: 'Safari', icon: code },
+    { id: 'safari', name: 'Safari', icon: safari },
     { id: 'projects', name: 'Projects', icon: projects },
   ];
 

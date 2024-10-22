@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { wType } from "../types/wType";
-  import { fileSystem, type FileSystem } from "../types/fileSystem";
+  import { fileSystem, type FileSystem } from "../utils/fileSystem";
   import {
     closeWindow,
     toggleMinimize,

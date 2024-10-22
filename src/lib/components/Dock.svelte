@@ -4,10 +4,10 @@
   export let isAppRunning: (type: 'terminal' | 'safari' | 'photos') => boolean;
   export let isAppMinimized: (type: 'terminal' | 'safari' | 'photos') => boolean;
   export let addWindow: (type: 'terminal' | 'safari' | 'photos') => void;
-  import launchpad from './../assets/img/launchpad.png';
-  import terminal from './../assets/img/terminal.avif';
-  import code from './../assets/img/code.png';
-  import photos from './../assets/img/photos.avif';
+  import launchpad from './../assets/icons/launchpad.png';
+  import terminal from './../assets/icons/terminal.avif';
+  import code from './../assets/icons/code.png';
+  import photos from './../assets/icons/photos.avif';
 
   const dispatch = createEventDispatcher();
 
