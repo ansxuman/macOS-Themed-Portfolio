@@ -11,6 +11,8 @@ export const GET: RequestHandler = async () => {
       headers: {
         'Content-Type': 'application/json',
         'api-key': DEV_TO_API_KEY,
+        'Accept': 'application/vnd.forem.api-v1+json',
+        'User-Agent': 'macOS-Themed-Portfolio',
       },
     });
     
@@ -25,3 +27,4 @@ export const GET: RequestHandler = async () => {
     return json({ error: 'Failed to fetch blog posts' }, { status: 500 });
   }
 };
+
