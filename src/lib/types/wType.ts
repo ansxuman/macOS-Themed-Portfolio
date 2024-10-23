@@ -1,6 +1,6 @@
 export interface wType {
     id: string;
-    type: "terminal" | "safari" | "photos";
+    type: "terminal" | "safari" | "photos" | "blog" | "projects";
     minimized: boolean;
     maximized: boolean;
     position: { x: number; y: number };

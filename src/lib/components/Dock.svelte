@@ -1,13 +1,15 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
   import { windows } from '../stores/windowStore';
-  export let isAppRunning: (type: 'terminal' | 'safari' | 'photos') => boolean;
-  export let isAppMinimized: (type: 'terminal' | 'safari' | 'photos') => boolean;
-  export let addWindow: (type: 'terminal' | 'safari' | 'photos') => void;
+  export let isAppRunning: (type: 'terminal' | 'safari' | 'photos' | 'blog' | 'projects') => boolean;
+  export let isAppMinimized: (type: 'terminal' | 'safari' | 'photos' | 'blog' | 'projects') => boolean;
+  export let addWindow: (type: 'terminal' | 'safari' | 'photos' | 'blog' | 'projects') => void;
   import launchpad from './../assets/icons/launchpad.png';
   import terminal from './../assets/icons/terminal.avif';
-  import code from './../assets/icons/code.png';
+  import safari from './../assets/icons/safari.png';
   import photos from './../assets/icons/photos.avif';
+  import blog from './../assets/icons/blog.avif';
+  import projects from './../assets/icons/projects.png';
 
   const dispatch = createEventDispatcher();
 
@@ -18,16 +20,15 @@
   $: terminalWindow = $windows.find(w => w.type === 'terminal');
   $: safariWindow = $windows.find(w => w.type === 'safari');
   $: photosWindow = $windows.find(w => w.type === 'photos');
+  $: blogWindow = $windows.find(w => w.type === 'blog');
+  $: projectsWindow = $windows.find(w => w.type === 'projects');
+
 </script>
 
 <div class="dock absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full flex space-x-4 items-end">
   <div class="dock-item" on:click={openLaunchpad}>
     <img src={launchpad} alt="Launchpad" class="h-12 w-12" />
   </div>
-
-  <div class="dock-item bg-blue-500"></div>
-  <div class="dock-item bg-green-500"></div>
-  <div class="dock-item bg-yellow-500"></div>
   
   <div class="dock-item" on:click={() => addWindow("terminal")}>
     <img src={terminal} alt="Terminal" class="h-12 w-12" />
@@ -38,18 +39,31 @@
   
   {#if safariWindow}
     <div class="dock-item" on:click={() => addWindow("safari")}>
-      <img src={code} alt="Code" class="h-12 w-12" />
+      <img src={safari} alt="safari" class="h-12 w-12" />
       <div class="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-green-500 rounded-full"></div>
     </div>
   {/if}
 
-  {#if photosWindow}
   <div class="dock-item" on:click={() => addWindow("photos")}>
     <img src={photos} alt="Photos" class="h-12 w-12" />
-    <div class="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-green-500 rounded-full"></div>
+    {#if photosWindow}
+      <div class="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-green-500 rounded-full"></div>
+    {/if}
   </div>
-{/if}
 
+  <div class="dock-item" on:click={() => addWindow("blog")}>
+    <img src={blog} alt="Blog" class="h-12 w-12" />
+    {#if blogWindow}
+      <div class="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-green-500 rounded-full"></div>
+    {/if}
+  </div>
+
+  <div class="dock-item" on:click={() => addWindow("projects")}>
+    <img src={projects} alt="Projects" class="h-12 w-12" />
+    {#if projectsWindow}
+      <div class="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-green-500 rounded-full"></div>
+    {/if}
+  </div>
 </div>
 
 <style>

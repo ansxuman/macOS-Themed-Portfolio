@@ -11,10 +11,12 @@
     export let window: wType;
   
     let selectedPost: BlogPost | null = null;
-    let isLoading: boolean = false;
+    let isLoading: boolean = true;
   
-    onMount(() => {
-      fetchBlogPosts();
+    onMount(async () => {
+      isLoading = true;
+      await fetchBlogPosts();
+      isLoading = false;
     });
   
     function selectPost(post: BlogPost) {
@@ -76,35 +78,41 @@
   
   <div class="flex-grow flex overflow-hidden">
     <div class="w-80 border-r border-gray-200 overflow-y-auto bg-gray-50">
-      {#each $blogPosts as post}
-        <div 
-          class="p-4 hover:bg-gray-100 cursor-pointer transition-colors duration-200 {selectedPost === post ? 'bg-blue-100 border-l-2 border-blue-500' : ''}"
-          on:click={() => selectPost(post)}
-        >
-          <div class="flex justify-between items-center mb-2">
-            <h3 class="font-semibold text-gray-800 truncate">{post.title}</h3>
-            <button 
-              class="text-gray-500 hover:text-gray-700 transition-colors duration-200"
-              on:click|stopPropagation={() => openPostLink(post.url)}
-            >
-              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
-                <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
-              </svg>
-            </button>
-          </div>
-          <p class="text-sm text-gray-600 mb-2 line-clamp-2">{post.description}</p>
-          <div class="flex justify-between items-center text-xs text-gray-500">
-            <span>{new Date(post.published_at).toLocaleDateString()}</span>
-            <span>{post.reading_time_minutes} min read</span>
-          </div>
-          <div class="flex flex-wrap gap-1 mt-2">
-            {#each post.tag_list as tag}
-              <span class="px-2 py-1 text-xs font-medium rounded-full {getRandomColor()}">{tag}</span>
-            {/each}
-          </div>
+      {#if isLoading}
+        <div class="flex justify-center items-center h-full">
+          <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"></div>
         </div>
-      {/each}
+      {:else}
+        {#each $blogPosts as post}
+          <div 
+            class="p-4 hover:bg-gray-100 cursor-pointer transition-colors duration-200 {selectedPost === post ? 'bg-blue-100 border-l-2 border-blue-500' : ''}"
+            on:click={() => selectPost(post)}
+          >
+            <div class="flex justify-between items-center mb-2">
+              <h3 class="font-semibold text-gray-800 truncate">{post.title}</h3>
+              <button 
+                class="text-gray-500 hover:text-gray-700 transition-colors duration-200"
+                on:click|stopPropagation={() => openPostLink(post.url)}
+              >
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                  <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+                </svg>
+              </button>
+            </div>
+            <p class="text-sm text-gray-600 mb-2 line-clamp-2">{post.description}</p>
+            <div class="flex justify-between items-center text-xs text-gray-500">
+              <span>{new Date(post.published_at).toLocaleDateString()}</span>
+              <span>{post.reading_time_minutes} min read</span>
+            </div>
+            <div class="flex flex-wrap gap-1 mt-2">
+              {#each post.tag_list as tag}
+                <span class="px-2 py-1 text-xs font-medium rounded-full {getRandomColor()}">{tag}</span>
+              {/each}
+            </div>
+          </div>
+        {/each}
+      {/if}
     </div>
   
     <div class="flex-1 overflow-hidden flex flex-col bg-white">

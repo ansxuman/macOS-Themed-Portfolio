@@ -165,7 +165,7 @@
   onMount(() => {
     syncProjectsToFileSystem(fileSystem);
     showPrompt = true;
-    addLine("Welcome to ansxuman's Portfolio Terminal");
+    addLine("Welcome to ansxuman's Terminal");
     addLine('Type "help" to see available commands');
     addLine('Try "ls" to see available files and directories');
   });
