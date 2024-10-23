@@ -31,7 +31,9 @@
   }
 
   function openEndlessHorse(url: string) {
-    window.open(url, '_blank');
+    if (typeof globalThis !== 'undefined') {
+        globalThis.window.open(url, '_blank');
+      }
   }
 
   function goBack() {
