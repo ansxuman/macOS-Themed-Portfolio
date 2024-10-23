@@ -30,6 +30,10 @@
     showHomepage = false;
   }
 
+  function openEndlessHorse(url: string) {
+    window.open(url, '_blank');
+  }
+
   function goBack() {
     if (canGoBack) {
       isLoading = true;
@@ -133,7 +137,7 @@
         <p class="text-xl mb-4">Explore the web with ease</p>
         <p class="text-sm mb-8">Note: Some websites may not load due to security restrictions</p>
         <div class="flex space-x-4 justify-center">
-          <button on:click={() => navigateTo('http://endless.horse/')} class="bg-white text-blue-500 px-6 py-2 rounded-full hover:bg-blue-100 transition duration-200 flex items-center justify-center">
+          <button on:click={() => openEndlessHorse('http://endless.horse/')} class="bg-white text-blue-500 px-6 py-2 rounded-full hover:bg-blue-100 transition duration-200 flex items-center justify-center">
             <span class="mr-2 text-sm">Click and Scroll down for $69</span>
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="24" height="24" viewBox="0 0 256 256" xml:space="preserve" class="w-5 h-5">
               <g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)">
