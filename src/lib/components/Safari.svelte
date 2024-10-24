@@ -78,7 +78,7 @@
 
 </script>
 
-<div class="bg-white h-full rounded-lg flex flex-col overflow-hidden">
+<div class="bg-white h-full rounded-lg flex flex-col overflow-hidde font-sf">
   <!-- Safari Header -->
   <div class="bg-gray-100 px-2 py-2 flex items-center cursor-move border-b border-gray-200" on:mousedown={(e) => startDrag(e, window.id, "move")}>
     <div class="flex space-x-2 mr-4">
@@ -186,3 +186,9 @@
     {/if}
   </div>
 </div>
+
+<style>
+  .font-sf {
+    font-family: -apple-system, BlinkMacSystemFont, 'San Francisco', 'Helvetica Neue', sans-serif;
+  }
+</style>

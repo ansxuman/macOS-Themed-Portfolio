@@ -21,7 +21,7 @@
   </script>
 
 <!-- Status Bar -->
-  <div class="h-6 bg-black/20 backdrop-blur-md flex items-center justify-between px-2 text-xs text-white">
+  <div class="h-6 bg-black/20 backdrop-blur-md flex items-center justify-between px-2 text-xs text-white font-sf">
     <!-- Left side -->
     <div class="flex items-center space-x-4">
       <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
@@ -38,7 +38,7 @@
     
     <!-- Right side -->
     <div class="flex items-center space-x-4">
-      <span>69%</span>
+      <span>100%</span>
       <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
         <path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/>
       </svg>
@@ -50,3 +50,9 @@
       <span>{formatTime(currentTime)}</span>
     </div>
   </div>
+
+  <style>
+    .font-sf {
+      font-family: -apple-system, BlinkMacSystemFont, 'San Francisco', 'Helvetica Neue', sans-serif;
+    }
+  </style>

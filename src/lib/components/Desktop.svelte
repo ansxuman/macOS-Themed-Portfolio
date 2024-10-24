@@ -52,7 +52,7 @@
   
   </script>
   
-  <div class="h-screen w-screen bg-[#2D3748] overflow-hidden">
+  <div class="h-screen w-screen bg-[#2D3748] overflow-hidden font-sf">
     <TopBar />
     <div class="p-4 flex flex-col items-start">
       
@@ -128,5 +128,9 @@
     .bg-gradient-to-r {
       background-size: 200% 200%;
       animation: gradient 5s ease infinite;
+    }
+
+    .font-sf {
+      font-family: -apple-system, BlinkMacSystemFont, 'San Francisco', 'Helvetica Neue', sans-serif;
     }
   </style>
