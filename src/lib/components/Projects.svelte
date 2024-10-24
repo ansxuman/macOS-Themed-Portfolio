@@ -74,7 +74,7 @@
 
   <div class="flex-grow flex overflow-hidden">
     <div class="w-80 border-r border-gray-200 overflow-y-auto bg-gray-50">
-      {#each $projects as project}
+      {#each $projects as project,index}
         <div 
           class="p-4 hover:bg-gray-100 cursor-pointer transition-colors duration-200 {selectedProject === project ? 'bg-blue-100 border-l-2 border-blue-500' : ''}"
           on:click={() => selectProject(project)}
@@ -105,6 +105,9 @@
             {/each}
           </div>
         </div>
+        {#if index < $projects.length - 1}
+          <hr class="border-gray-300" />
+        {/if}
       {/each}
     </div>
 

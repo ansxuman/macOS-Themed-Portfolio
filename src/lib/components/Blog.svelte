@@ -83,7 +83,7 @@
           <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"></div>
         </div>
       {:else}
-        {#each $blogPosts as post}
+        {#each $blogPosts as post, index}
           <div 
             class="p-4 hover:bg-gray-100 cursor-pointer transition-colors duration-200 {selectedPost === post ? 'bg-blue-100 border-l-2 border-blue-500' : ''}"
             on:click={() => selectPost(post)}
@@ -111,6 +111,9 @@
               {/each}
             </div>
           </div>
+          {#if index < $blogPosts.length - 1}
+            <hr class="border-gray-300" />
+          {/if}
         {/each}
       {/if}
     </div>

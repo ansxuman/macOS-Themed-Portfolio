@@ -140,14 +140,14 @@
         <p class="text-sm mb-8">Note: Some websites may not load due to security restrictions</p>
         <div class="flex space-x-4 justify-center">
           <button on:click={() => openEndlessHorse('http://endless.horse/')} class="bg-white text-blue-500 px-6 py-2 rounded-full hover:bg-blue-100 transition duration-200 flex items-center justify-center">
-            <span class="mr-2 text-sm">Click and Scroll down for $69</span>
-            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="24" height="24" viewBox="0 0 256 256" xml:space="preserve" class="w-5 h-5">
+            <span class="mr-2 text-sm">Endless Horse</span>
+            <!-- <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="24" height="24" viewBox="0 0 256 256" xml:space="preserve" class="w-5 h-5">
               <g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)">
                 <path d="M 30 15 C 13.431 15 0 28.431 0 45 s 13.431 30 30 30 s 30 -13.431 30 -30 S 46.569 15 30 15 z M 30 54 c -4.971 0 -9 -4.029 -9 -9 s 4.029 -9 9 -9 s 9 4.029 9 9 c 0.007 4.964 -4.012 8.993 -8.976 9 C 30.016 54 30.008 54 30 54 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(0,174,239); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
                 <path d="M 63.72 37.5 c 7.622 2.194 16.62 0 16.62 0 c -2.611 11.4 -10.891 18.54 -22.831 19.409 C 52.777 67.893 41.96 75.007 30 75 l 9 -28.606 C 48.252 16.992 52.994 15 74.935 15 H 90 C 87.48 26.1 78.794 34.579 63.72 37.5 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(0,140,207); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
               </g>
-            </svg>
-            <span class="ml-2 text-sm">Voucher</span>
+            </svg> -->
+            <!-- <span class="ml-2 text-sm"></span> -->
           </button>
           <button on:click={() => navigateTo('https://www.wikipedia.org')} class="bg-white text-purple-500 px-6 py-2 rounded-full hover:bg-purple-100 transition duration-200">
             Wikipedia
