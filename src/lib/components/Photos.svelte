@@ -22,12 +22,12 @@
 
   function toggleFavorite(photo: Photo) {
   photo.isFavorite = !photo.isFavorite;
-  photos = [...photos]; // Trigger reactivity
+  photos = [...photos];
   localStorage.setItem('favoritePhotos', JSON.stringify(photos.filter(p => p.isFavorite).map(p => p.name)));
 }
 
   onMount(async () => {
-    const photoModules = import.meta.glob('../assets/photos/*.{jpeg,jpg,png,gif}', { eager: true });
+    const photoModules = import.meta.glob('/assets/photos/*.{jpeg,jpg,png,gif}', { eager: true });
     const favoritePhotos = JSON.parse(localStorage.getItem('favoritePhotos') || '[]');
     for (const path in photoModules) {
       const photo = photoModules[path] as { default: string };

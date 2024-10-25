@@ -44,7 +44,7 @@
 
   function loadMusic(index: number) {
     musicIndex = index;
-    audio.src = `/src/lib/assets/mp3s/${ALL_MUSIC[index].src}`;
+    audio.src = `/assets/mp3s/${ALL_MUSIC[index].src}`;
     audio.load();
   }
 
@@ -230,7 +230,7 @@
       class="w-24 h-24 bg-gray-600 rounded-full overflow-hidden flex-shrink-0 shadow-lg"
     >
       <img
-        src="/src/lib/assets/images/{currentSong.img}"
+        src={`/assets/images/${currentSong.img}`}
         alt="Album Art"
         class="w-full h-full object-cover"
         class:rotate={isPlaying}

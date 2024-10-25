@@ -4,12 +4,12 @@
   export let isAppRunning: (type: 'terminal' | 'safari' | 'photos' | 'blog' | 'projects') => boolean;
   export let isAppMinimized: (type: 'terminal' | 'safari' | 'photos' | 'blog' | 'projects') => boolean;
   export let addWindow: (type: 'terminal' | 'safari' | 'photos' | 'blog' | 'projects') => void;
-  import launchpad from './../assets/icons/launchpad.png';
-  import terminal from './../assets/icons/terminal.avif';
-  import safari from './../assets/icons/safari.png';
-  import photos from './../assets/icons/photos.avif';
-  import blog from './../assets/icons/blog.avif';
-  import projects from './../assets/icons/projects.png';
+  import launchpad from '/static/assets/icons/launchpad.png';
+  import terminal from '/static/assets/icons/terminal.avif';
+  import safari from '/static/assets/icons/safari.png';
+  import photos from '/static/assets/icons/photos.avif';
+  import blog from '/static/assets/icons/blog.avif';
+  import projects from '/static/assets/icons/projects.png';
 
   const dispatch = createEventDispatcher();
 
