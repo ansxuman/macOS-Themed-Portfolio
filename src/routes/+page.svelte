@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  import { browser } from '$app/environment';
   import Desktop from "./../lib/components/Desktop.svelte";
   import Dock from "../lib/components/Dock.svelte";
   import Window from "../lib/components/Window.svelte";
@@ -9,7 +10,10 @@
   let isLaunchpadOpen = false;
 
   onMount(() => {
-    addWindow("terminal");
+    if (browser) {
+      document.title = "Home | Ansxuman";
+      addWindow("terminal");
+    }
   });
 
   function handleOpenLaunchpad() {
@@ -17,9 +21,9 @@
   }
 
   function handleLaunchApp(event: CustomEvent<string>) {
-  addWindow(event.detail as "terminal" | "safari" | "photos" | "blog" | "projects");
-  isLaunchpadOpen = false;
-}
+    addWindow(event.detail as "terminal" | "safari" | "photos" | "blog" | "projects");
+    isLaunchpadOpen = false;
+  }
 </script>
 
 <main class="min-h-screen font-mono relative overflow-hidden">
