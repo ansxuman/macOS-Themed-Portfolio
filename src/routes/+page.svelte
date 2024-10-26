@@ -12,7 +12,9 @@
   onMount(() => {
     if (browser) {
       document.title = "Home | Ansxuman";
-      addWindow("terminal");
+      if (window.innerWidth >= 768) {
+        addWindow("terminal");
+      }
     }
   });
 

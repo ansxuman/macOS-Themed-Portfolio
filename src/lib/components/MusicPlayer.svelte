@@ -229,10 +229,8 @@
     </div>
   </div>
 
-  <div class="flex items-center space-x-4 mb-6">
-    <div
-      class="w-24 h-24 bg-gray-600 rounded-full overflow-hidden flex-shrink-0 shadow-lg"
-    >
+  <div class="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4 mb-6">
+    <div class="w-24 h-24 bg-gray-600 rounded-full overflow-hidden flex-shrink-0 shadow-lg">
       <img
         src={getImagePath(currentSong.img)}
         alt="Album Art"
@@ -240,7 +238,7 @@
         class:rotate={isPlaying}
       />
     </div>
-    <div class="flex-1 min-w-0">
+    <div class="flex-1 min-w-0 text-center md:text-left">
       <p class="font-bold text-lg truncate">{currentSong.name}</p>
       <p class="text-sm text-gray-300 truncate">{currentSong.artist}</p>
       <span class="inline-block bg-blue-500 text-xs font-semibold px-2 py-1 rounded-full mt-1">{currentSong.genre}</span>
@@ -525,27 +523,25 @@
   {/if}
 
   {#if isPlaylistVisible}
-    <div class="mt-4 bg-white/5 rounded-lg p-4">
+    <div class="mt-4 bg-white/5 rounded-lg p-4 max-h-60 overflow-y-auto custom-scrollbar">
       <h3 class="text-lg font-semibold mb-2">Playlist</h3>
-      <div class="max-h-60 overflow-y-auto custom-scrollbar">
-        <ul class="px-2">
-          {#each filteredPlaylist as song, index}
-            <li class="py-2 px-3 cursor-pointer hover:bg-white/10 rounded" on:click={() => selectSong(index)}>
-              <div class="flex justify-between items-center">
-                <div>
-                  <p class="font-medium">{song.name}</p>
-                  <p class="text-sm text-gray-300">{song.artist}</p>
-                </div>
-                {#if song === currentSong}
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
-                  </svg>
-                {/if}
+      <ul class="px-2">
+        {#each filteredPlaylist as song, index}
+          <li class="py-2 px-3 cursor-pointer hover:bg-white/10 rounded" on:click={() => selectSong(index)}>
+            <div class="flex justify-between items-center">
+              <div>
+                <p class="font-medium">{song.name}</p>
+                <p class="text-sm text-gray-300">{song.artist}</p>
               </div>
-            </li>
-          {/each}
-        </ul>
-      </div>
+              {#if song === currentSong}
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+                </svg>
+              {/if}
+            </div>
+          </li>
+        {/each}
+      </ul>
     </div>
   {/if}
 </div>

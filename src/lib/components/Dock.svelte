@@ -1,9 +1,11 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
   import { windows } from '../stores/windowStore';
+
   export let isAppRunning: (type: 'terminal' | 'safari' | 'photos' | 'blog' | 'projects') => boolean;
   export let isAppMinimized: (type: 'terminal' | 'safari' | 'photos' | 'blog' | 'projects') => boolean;
   export let addWindow: (type: 'terminal' | 'safari' | 'photos' | 'blog' | 'projects') => void;
+
   import launchpad from '$lib/assets/icons/launchpad.png';
   import terminal from '$lib/assets/icons/terminal.avif';
   import safari from '$lib/assets/icons/safari.png';
@@ -12,9 +14,22 @@
   import projects from '$lib/assets/icons/projects.png';
 
   const dispatch = createEventDispatcher();
+  let showPopup = false;
 
-  function openLaunchpad() {
-    dispatch('openLaunchpad');
+  function handleDockClick(appType: string) {
+    if (window.innerWidth < 768) {
+      showPopup = true;
+    } else {
+      if (appType === 'launchpad') {
+        dispatch('openLaunchpad');
+      } else {
+        addWindow(appType);
+      }
+    }
+  }
+
+  function closePopup() {
+    showPopup = false;
   }
 
   $: terminalWindow = $windows.find(w => w.type === 'terminal');
@@ -22,49 +37,58 @@
   $: photosWindow = $windows.find(w => w.type === 'photos');
   $: blogWindow = $windows.find(w => w.type === 'blog');
   $: projectsWindow = $windows.find(w => w.type === 'projects');
-
 </script>
 
-<div class="dock absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full flex space-x-4 items-end">
-  <div class="dock-item" on:click={openLaunchpad}>
+<div class="dock fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full flex space-x-4 items-end">
+  <div class="dock-item" on:click={() => handleDockClick('launchpad')}>
     <img src={launchpad} alt="Launchpad" class="h-12 w-12" />
   </div>
   
-  <div class="dock-item" on:click={() => addWindow("terminal")}>
+  <div class="dock-item" on:click={() => handleDockClick("terminal")}>
     <img src={terminal} alt="Terminal" class="h-12 w-12" />
     {#if terminalWindow}
       <div class="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-green-500 rounded-full"></div>
     {/if}
   </div>
   
-  {#if safariWindow}
-    <div class="dock-item" on:click={() => addWindow("safari")}>
-      <img src={safari} alt="safari" class="h-12 w-12" />
+  <div class="dock-item" on:click={() => handleDockClick("safari")}>
+    <img src={safari} alt="safari" class="h-12 w-12" />
+    {#if safariWindow}
       <div class="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-green-500 rounded-full"></div>
-    </div>
-  {/if}
+    {/if}
+  </div>
 
-  <div class="dock-item" on:click={() => addWindow("photos")}>
+  <div class="dock-item" on:click={() => handleDockClick("photos")}>
     <img src={photos} alt="Photos" class="h-12 w-12" />
     {#if photosWindow}
       <div class="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-green-500 rounded-full"></div>
     {/if}
   </div>
 
-  <div class="dock-item" on:click={() => addWindow("blog")}>
+  <div class="dock-item" on:click={() => handleDockClick("blog")}>
     <img src={blog} alt="Blog" class="h-12 w-12" />
     {#if blogWindow}
       <div class="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-green-500 rounded-full"></div>
     {/if}
   </div>
 
-  <div class="dock-item" on:click={() => addWindow("projects")}>
+  <div class="dock-item" on:click={() => handleDockClick("projects")}>
     <img src={projects} alt="Projects" class="h-12 w-12" />
     {#if projectsWindow}
       <div class="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-green-500 rounded-full"></div>
     {/if}
   </div>
 </div>
+
+{#if showPopup}
+  <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white rounded-lg p-6 shadow-lg text-center max-w-sm mx-auto">
+      <h2 class="text-lg font-semibold mb-4">Limited Features</h2>
+      <p class="mb-4">For full feature access, please use a desktop device.</p>
+      <button class="bg-blue-500 text-white px-4 py-2 rounded" on:click={closePopup}>Close</button>
+    </div>
+  </div>
+{/if}
 
 <style>
   .dock {
