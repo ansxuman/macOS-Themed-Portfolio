@@ -29,6 +29,10 @@
     : ALL_MUSIC.filter(song => song.genre === selectedGenre);
   $: currentSong = ALL_MUSIC[musicIndex];
 
+  function getImagePath(imageName: string): string {
+    return new URL(`../assets/images/${imageName}`, import.meta.url).href;
+  }
+
   onMount(() => {
     loadMusic(musicIndex);
     audio.addEventListener("timeupdate", updateProgress);
@@ -44,7 +48,7 @@
 
   function loadMusic(index: number) {
     musicIndex = index;
-    audio.src = `/assets/mp3s/${ALL_MUSIC[index].src}`;
+    audio.src = new URL(`../assets/mp3s/${ALL_MUSIC[index].src}`, import.meta.url).href;
     audio.load();
   }
 
@@ -230,7 +234,7 @@
       class="w-24 h-24 bg-gray-600 rounded-full overflow-hidden flex-shrink-0 shadow-lg"
     >
       <img
-        src={`/assets/images/${currentSong.img}`}
+        src={getImagePath(currentSong.img)}
         alt="Album Art"
         class="w-full h-full object-cover"
         class:rotate={isPlaying}

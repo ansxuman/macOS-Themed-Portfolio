@@ -1,11 +1,11 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
   import { fade, scale } from 'svelte/transition';
-  import photos from '/static/assets/icons/photos.avif'; 
-  import terminal from '/static/assets/icons/terminal.avif';
-  import safari from '/static/assets/icons/safari.png';
-  import projects from '/static/assets/icons/projects.png';
-  import blog from '/static/assets/icons/blog.avif';
+  import photos from '$lib/assets/icons/photos.avif'; 
+  import terminal from '$lib/assets/icons/terminal.avif';
+  import safari from '$lib/assets/icons/safari.png';
+  import projects from '$lib/assets/icons/projects.png';
+  import blog from '$lib/assets/icons/blog.avif';
   
   export let isOpen: boolean;
   const dispatch = createEventDispatcher();
