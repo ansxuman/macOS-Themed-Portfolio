@@ -27,7 +27,7 @@
 }
 
   onMount(async () => {
-    const photoModules = import.meta.glob('$lib/assets/photos/*.{jpeg,jpg,png,gif}', { eager: true });
+    const photoModules = import.meta.glob('../assets/photos/*.{jpeg,jpg,png,gif}', { eager: true });
     const favoritePhotos = JSON.parse(localStorage.getItem('favoritePhotos') || '[]');
     for (const path in photoModules) {
       const photo = photoModules[path] as { default: string };
