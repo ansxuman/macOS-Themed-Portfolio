@@ -50,6 +50,30 @@
     musicIndex = index;
     audio.src = new URL(`../assets/mp3s/${ALL_MUSIC[index].src}`, import.meta.url).href;
     audio.load();
+    if ('mediaSession' in navigator) {
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: ALL_MUSIC[index].name,
+        artist: ALL_MUSIC[index].artist,
+        artwork: [
+          {
+            src: getImagePath(ALL_MUSIC[index].img),
+            sizes: '512x512',
+            type: 'image/png'
+          }
+        ]
+      });
+
+      navigator.mediaSession.setActionHandler('play', () => {
+        audio.play();
+        isPlaying = true;
+      });
+      navigator.mediaSession.setActionHandler('pause', () => {
+        audio.pause();
+        isPlaying = false;
+      });
+      navigator.mediaSession.setActionHandler('previoustrack', prevSong);
+      navigator.mediaSession.setActionHandler('nexttrack', nextSong);
+    }
   }
 
   function togglePlay() {
@@ -173,12 +197,10 @@
       : ALL_MUSIC.filter(song => song.genre === selectedGenre);
     
     if (!newFilteredPlaylist.includes(ALL_MUSIC[musicIndex])) {
-      // Current song is not in the new filtered playlist
       musicIndex = ALL_MUSIC.findIndex(song => newFilteredPlaylist.includes(song));
       loadMusic(musicIndex);
       if (isPlaying) audio.play();
     } else {
-      // Update musicIndex to reflect the position in the new filtered playlist
       musicIndex = ALL_MUSIC.findIndex(song => song === currentSong);
     }
     
@@ -599,3 +621,4 @@
     background-color: rgba(255, 255, 255, 0.5);
   }
 </style>
+
