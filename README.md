@@ -8,12 +8,32 @@ Powered by [SvelteKit](https://kit.svelte.dev/), [TailwindCSS](https://tailwindc
 
 This project is a personal portfolio website that mimics the look and feel of macOS. It features:
 
+## Core Features
 - A desktop-like interface with Status Bar, Widgets and Dock
 - Launchpad for an app-like experience
 - Draggable and resizable windows
-- Minimizable and maximizable windows
-- Interactive Terminal
-- Applications designed to present to showcase your stuff in a distinctive manner
+- Minimizable, maximizable and closable windows
+
+## Desktop Widgets
+- Music Player
+  - Copyright Free playlist with play controls
+  - Genre selection and volume control
+- Clock Widget
+  - Live date and time display
+
+## Applications
+- Terminal
+  - Interactive command-line interface
+  - Supports basic Linux commands
+- Blog Viewer
+  - Connected to Dev.to
+  - Read articles directly in the window
+- Project Showcase
+  - Live GitHub repository integration
+- Photo Gallery
+  - Personal photography collection
+- Safari Browser
+  - Browse websites within the portfolio
 
 ## Getting Started
 
