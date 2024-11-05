@@ -1,6 +1,6 @@
 # macOS-Themed Portfolio
 
-A unique, interactive portfolio website inspired by the macOS interface : https://ssh-i.in
+A unique, interactive portfolio website inspired by the macOS interface : https://ssh-i.in || https://macosportfolio.netlify.app
 
 Powered by [SvelteKit](https://kit.svelte.dev/), [TailwindCSS](https://tailwindcss.com/) and [TypeScript](https://www.typescriptlang.org/).
 
