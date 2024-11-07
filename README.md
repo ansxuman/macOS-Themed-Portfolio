@@ -4,6 +4,9 @@ A unique, interactive portfolio website inspired by the macOS interface : https:
 
 Powered by [SvelteKit](https://kit.svelte.dev/), [TailwindCSS](https://tailwindcss.com/) and [TypeScript](https://www.typescriptlang.org/).
 
+<img width="1439" alt="Screenshot 2024-11-08 at 1 37 12 AM" src="https://github.com/user-attachments/assets/9239bb20-6a1e-4ca2-8896-39dc8d082dbd">
+
+
 ## Project Overview
 
 This project is a personal portfolio website that mimics the look and feel of macOS. It features:
