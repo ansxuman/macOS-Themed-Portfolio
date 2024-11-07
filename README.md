@@ -53,6 +53,8 @@ Run the development server:
    ```bash
    npm run dev
    ```
+Open http://localhost:1111 in your browser to see the result.
+
 Build for production:
    ```bash
    npm run build
