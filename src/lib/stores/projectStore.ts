@@ -4,6 +4,26 @@ import ProjectIcons from '../components/ProjectIcons.svelte';
 
 const initialProjects: ProjectData[] = [
   {
+    id: 'macOS-Themed-Portfolio',
+    name: 'macOS Themed Portfolio',
+    icon: 'svelte',
+    shortDescription: 'An interactive portfolio website inspired by the macOS interface, built with SvelteKit, TailwindCSS, and TypeScript.',
+    githubUrl: 'https://github.com/ansxuman/macOS-Themed-Portfolio',
+    readmeUrl: 'https://raw.githubusercontent.com/ansxuman/macOS-Themed-Portfolio/main/README.md',
+    technologies: ['Svelte', 'TypeScript', 'TailwindCSS'],
+    type: 'application'
+  },
+  {
+    id: 'go-service',
+    name: 'Go Service',
+    icon: 'go',
+    shortDescription: 'A minimal boilerplate for building cross-platform system services in Go',
+    githubUrl: 'https://github.com/ansxuman/go-service',
+    readmeUrl: 'https://raw.githubusercontent.com/ansxuman/go-service/main/README.md',
+    technologies: ['Go'],
+    type: 'library'
+  },
+  {
     id: 'go-touchid',
     name: 'Go TouchID',
     icon: 'go',

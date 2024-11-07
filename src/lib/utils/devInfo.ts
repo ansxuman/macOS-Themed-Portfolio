@@ -24,6 +24,6 @@ export const ansxuman: Developer = {
     "Experimenting with New Technologies",
   ],
   operatingSystems: ["macOS 15 Sequoia", "Debian Bookworm", "Ubuntu"],
-  toolsUsed: ["Docker", "Kubernetes", "Git", "Parallels", "Termius", "Postman", "Jenkins"],
-  ides: ["Cursor", "Zed", "VSCode", "Android Studio", "Xcode", "Neovim", "IntelliJ IDEA"],
+  toolsUsed: ["Docker", "Git", "Parallels", "Termius", "Postman"],
+  ides: ["Cursor", "Zed", "VSCode", "Android Studio", "Xcode", "Neovim"],
 };

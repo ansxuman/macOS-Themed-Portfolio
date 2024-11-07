@@ -146,6 +146,12 @@
       case "echo":
         addLine(args.join(" "));
         break;
+      case "niharika":
+        addLine("🖤");
+        break;
+      case "exit":
+        closeWindow(window.id);
+        break;
       default:
         addLine(
           `Command not found: ${command}. Type "help" for available commands.`
