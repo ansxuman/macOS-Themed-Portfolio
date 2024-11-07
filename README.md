@@ -58,4 +58,10 @@ Build for production:
    npm run build
    ```
 
+To make the dev.to article work,update API Key in the .env file
+   ```bash
+   npm run build
+   ```bash
+   DEV_TO_API_KEY=<YOUR_API_KEY>
+   ```
 
