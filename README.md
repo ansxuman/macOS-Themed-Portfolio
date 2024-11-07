@@ -1,15 +1,14 @@
 <h1 align="center">
   <br>
-
   <br>
  macOS-Themed Portfolio
-  <br>
 </h1>
+<p align="center">
+  Powered by [SvelteKit](https://kit.svelte.dev/), [TailwindCSS](https://tailwindcss.com/) and [TypeScript](https://www.typescriptlang.org/).
+  </p>
+  <br>
 
 A unique, interactive portfolio website inspired by the macOS interface : https://ssh-i.in || https://macosportfolio.netlify.app
-
-Powered by [SvelteKit](https://kit.svelte.dev/), [TailwindCSS](https://tailwindcss.com/) and [TypeScript](https://www.typescriptlang.org/).
-
 <p align="center">
   <a href="#projectoverview">ProjectOverview</a> •
   <a href="#installation">Installation</a> •
