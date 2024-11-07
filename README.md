@@ -1,6 +1,4 @@
 <h1 align="center">
-  <br>
-  <br>
  macOS-Themed Portfolio
 </h1>
 <p align="center">
