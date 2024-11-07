@@ -16,7 +16,7 @@ A unique, interactive portfolio website inspired by the macOS interface : https:
   <a href="#license">License</a> •
 </p>
 
-![ScreenRecording2024-11-08at1 02 49AM-ezgif com-optimize](https://github.com/user-attachments/assets/748fb411-9537-4164-b308-b97f4387b6dc)
+<img width="1439" alt="Screenshot 2024-11-08 at 1 37 12 AM" src="https://github.com/user-attachments/assets/9239bb20-6a1e-4ca2-8896-39dc8d082dbd">
 
 
 ## ProjectOverview
