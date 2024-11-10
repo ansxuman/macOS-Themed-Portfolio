@@ -103,7 +103,21 @@
             <p class="text-sm text-gray-600 mb-2 line-clamp-2">{post.description}</p>
             <div class="flex justify-between items-center text-xs text-gray-500">
               <span>{new Date(post.published_at).toLocaleDateString()}</span>
-              <span>{post.reading_time_minutes} min read</span>
+              <div class="flex items-center gap-3">
+                <span class="flex items-center gap-1">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  {post.reading_time_minutes}m
+                </span>
+                <span class="flex items-center gap-1">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                  </svg>
+                  {post.page_views_count.toLocaleString()}
+                </span>
+              </div>
             </div>
             <div class="flex flex-wrap gap-1 mt-2">
               {#each post.tag_list as tag}
@@ -122,7 +136,9 @@
       {#if selectedPost}
         <div class="overflow-y-auto flex-grow p-6">
           <h1 class="text-2xl font-bold mb-4">{selectedPost.title}</h1>
-          <img src={selectedPost.cover_image} alt={selectedPost.title} class="w-full h-48 object-cover mb-4 rounded-lg" />
+          {#if selectedPost.cover_image}
+            <img src={selectedPost.cover_image} alt={selectedPost.title} class="w-full h-48 object-cover mb-4 rounded-lg" />
+          {/if}
           <div class="markdown-body prose prose-sm max-w-none">
             <SvelteMarkdown source={selectedPost.body_markdown} />
           </div>

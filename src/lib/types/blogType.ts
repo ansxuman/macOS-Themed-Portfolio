@@ -8,4 +8,5 @@ export interface BlogPost {
     tag_list: string[];
     reading_time_minutes: number;
     body_markdown: string;
+    page_views_count: number;
   }

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte';
+  import { createEventDispatcher,onMount } from 'svelte';
   import { windows } from '../stores/windowStore';
 
   export let isAppRunning: (type: 'terminal' | 'safari' | 'photos' | 'blog' | 'projects') => boolean;
@@ -12,18 +12,36 @@
   import photos from '$lib/assets/icons/photos.avif';
   import blog from '$lib/assets/icons/blog.avif';
   import projects from '$lib/assets/icons/projects.png';
+  import github from '$lib/assets/icons/github.png';
 
   const dispatch = createEventDispatcher();
   let showPopup = false;
+  let windowWidth = 0;
+
+  onMount(() => {
+    windowWidth = window.innerWidth;
+
+    const handleResize = () => {
+      windowWidth = window.innerWidth;
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  });
 
   function handleDockClick(appType: string) {
-    if (window.innerWidth < 768) {
+    if (!isLargeScreen && appType !== 'github') {
       showPopup = true;
     } else {
       if (appType === 'launchpad') {
         dispatch('openLaunchpad');
+      } else if (appType === 'github') {
+        window.open('https://github.com/ansxuman', '_blank');
       } else {
-        addWindow(appType);
+        addWindow(appType as 'terminal' | 'safari' | 'photos' | 'blog' | 'projects');
       }
     }
   }
@@ -37,6 +55,8 @@
   $: photosWindow = $windows.find(w => w.type === 'photos');
   $: blogWindow = $windows.find(w => w.type === 'blog');
   $: projectsWindow = $windows.find(w => w.type === 'projects');
+  $: isLargeScreen = windowWidth >= 1024;
+
 </script>
 
 <div class="dock fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full flex space-x-4 items-end">
@@ -51,12 +71,14 @@
     {/if}
   </div>
   
-  <div class="dock-item" on:click={() => handleDockClick("safari")}>
-    <img src={safari} alt="safari" class="h-12 w-12" />
-    {#if safariWindow}
-      <div class="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-green-500 rounded-full"></div>
-    {/if}
-  </div>
+  {#if isLargeScreen}
+    <div class="dock-item" on:click={() => handleDockClick("safari")}>
+      <img src={safari} alt="safari" class="h-12 w-12" />
+      {#if safariWindow}
+        <div class="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-green-500 rounded-full"></div>
+      {/if}
+    </div>
+  {/if}
 
   <div class="dock-item" on:click={() => handleDockClick("photos")}>
     <img src={photos} alt="Photos" class="h-12 w-12" />
@@ -78,7 +100,13 @@
       <div class="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-green-500 rounded-full"></div>
     {/if}
   </div>
+
+  <div class="dock-item" on:click={() => handleDockClick("github")}>
+    <img src={github} alt="Github" class="h-12 w-12" />
+  </div>
+  
 </div>
+
 
 {#if showPopup}
   <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
