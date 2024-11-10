@@ -95,5 +95,5 @@ export const ALL_MUSIC: Song[] = [
   // }
 ];
 
-export const INITIAL_VOLUME = 69;
+export const INITIAL_VOLUME = 70;
 export const PROGRESS_UPDATE_DURATION = 200;
