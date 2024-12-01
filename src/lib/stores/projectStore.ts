@@ -1,8 +1,17 @@
 import { writable } from 'svelte/store';
 import type { ProjectData } from '../types/projectType';
-import ProjectIcons from '../components/ProjectIcons.svelte';
 
 const initialProjects: ProjectData[] = [
+  {
+    id: 'Clave',
+    name: 'Clave',
+    icon: 'wails',
+    shortDescription: 'A lightweight cross-platform desktop authenticator app',
+    githubUrl: 'https://github.com/ansxuman/clave',
+    readmeUrl: 'https://raw.githubusercontent.com/ansxuman/clave/main/README.md',
+    technologies: ['Go','Wails','Svelte', 'TypeScript', 'TailwindCSS'],
+    type: 'application'
+  },
   {
     id: 'macOS-Themed-Portfolio',
     name: 'macOS Themed Portfolio',
