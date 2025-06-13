@@ -23,6 +23,7 @@
   let isPlaylistVisible = false;
   let repeatMode: RepeatMode = "shuffle";
   let selectedGenre = 'All';
+  let isGenreDropdownOpen = false;
   $: genres = ['All', ...new Set(ALL_MUSIC.map(song => song.genre))];
   $: filteredPlaylist = selectedGenre === 'All' 
     ? ALL_MUSIC 
@@ -39,10 +40,28 @@
     audio.addEventListener("loadedmetadata", setTotalDuration);
     audio.addEventListener("ended", handleSongEnd);
 
+    // Add event listener to close dropdown when clicking outside
+    const handleClickOutside = (event: MouseEvent) => {
+      if (isGenreDropdownOpen) {
+        const target = event.target as HTMLElement;
+        const dropdown = document.querySelector('.genre-dropdown');
+        const dropdownButton = document.querySelector('.genre-dropdown-button');
+        
+        if (dropdown && dropdownButton && 
+            !dropdown.contains(target) && 
+            !dropdownButton.contains(target)) {
+          isGenreDropdownOpen = false;
+        }
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+
     return () => {
       audio.removeEventListener("timeupdate", updateProgress);
       audio.removeEventListener("loadedmetadata", setTotalDuration);
       audio.removeEventListener("ended", handleSongEnd);
+      document.removeEventListener('click', handleClickOutside);
     };
   });
 
@@ -190,8 +209,13 @@
     }
   }
 
+  function getGlobalIndex(filteredIndex: number): number {
+    return ALL_MUSIC.findIndex(song => song === filteredPlaylist[filteredIndex]);
+  }
+  
   function changeGenre(genre: string) {
     selectedGenre = genre;
+    isGenreDropdownOpen = false;
     const newFilteredPlaylist = selectedGenre === 'All' 
       ? ALL_MUSIC 
       : ALL_MUSIC.filter(song => song.genre === selectedGenre);
@@ -206,10 +230,6 @@
     
     filteredPlaylist = newFilteredPlaylist;
   }
-
-  function getGlobalIndex(filteredIndex: number): number {
-    return ALL_MUSIC.findIndex(song => song === filteredPlaylist[filteredIndex]);
-  }
 </script>
 
 <div
@@ -219,18 +239,28 @@
     <h2 class="text-xl font-semibold">Now Playing</h2>
     <div class="flex items-center space-x-2">
       <div class="relative">
-        <select 
-          bind:value={selectedGenre} 
-          on:change={() => changeGenre(selectedGenre)}
-          class="appearance-none bg-white/10 border border-white/20 text-white py-1 px-2 pr-8 rounded leading-tight focus:outline-none focus:bg-white/20 focus:border-white"
+        <button 
+          class="appearance-none bg-white/10 backdrop-blur-md border border-white/20 text-white py-1 px-3 rounded leading-tight focus:outline-none focus:bg-white/20 focus:border-white flex items-center justify-between min-w-[120px] genre-dropdown-button"
+          on:click={() => isGenreDropdownOpen = !isGenreDropdownOpen}
         >
-          {#each genres as genre}
-            <option value={genre}>{genre}</option>
-          {/each}
-        </select>
-        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white">
-          <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-        </div>
+          <span>{selectedGenre}</span>
+          <svg class="fill-current h-4 w-4 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+          </svg>
+        </button>
+        
+        {#if isGenreDropdownOpen}
+          <div class="absolute z-10 mt-1 min-w-[180px] w-auto bg-white/10 backdrop-blur-md border-none rounded-md shadow-lg genre-dropdown">
+            {#each genres as genre}
+              <div 
+                class="px-4 py-2 text-white hover:bg-white/10 cursor-pointer whitespace-nowrap" 
+                on:click={() => changeGenre(genre)}
+              >
+                {genre}
+              </div>
+            {/each}
+          </div>
+        {/if}
       </div>
       <button class="focus:outline-none" on:click={togglePlaylist}>
         <svg
