@@ -203,7 +203,7 @@
   }
 </script>
 
-<div class="bg-gray-900/40 backdrop-blur-md h-full border border-white/20">
+<div class="bg-gray-900/40 backdrop-blur-md h-full">
   <!-- Terminal Header -->
   <div
     class="bg-gray-800/80 px-4 py-2 flex items-center cursor-move"
