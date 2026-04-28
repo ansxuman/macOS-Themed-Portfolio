@@ -7,4 +7,4 @@ git pull
 npm run build
 
 # Restart the pm2 server
-pm2 restart macOS-Portfolio --watch
+pm2 restart macOS-Portfolio 
