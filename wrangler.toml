@@ -1,3 +1,3 @@
-name = "macos-themed-portfolio-api"
+name = "macos-themed-portfolio"
 main = "worker/worker.js"
 compatibility_date = "2026-04-28"
