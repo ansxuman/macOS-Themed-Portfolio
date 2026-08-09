@@ -21,7 +21,7 @@
 </script>
 
 <!-- Status Bar -->
-<div class="hidden md:flex h-6 bg-black/20 backdrop-blur-md items-center justify-between px-2 text-xs text-white font-sf">
+<div class="hidden md:flex h-6 w-full bg-black/20 backdrop-blur-md items-center justify-between px-2 text-xs text-white font-sf">
   <!-- Left side -->
   <div class="flex items-center space-x-4">
     <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
